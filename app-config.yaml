@@ -97,15 +97,23 @@ catalog:
       rules:
         - allow: [Template]
 
-    # Local example organizational data
-    - type: file
-      target: ../../examples/org.yaml
-      rules:
-        - allow: [User, Group]
+    # # Local example organizational data
+    # - type: file
+    #   target: ../../examples/org.yaml
+    #   rules:
+    #     - allow: [User, Group]
 
     ## Uncomment these lines to add more example data
-    # - type: url
-    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
+    - type: url
+      target: https://github.com/yashoswalyo/backstage-templates/blob/master/feedback-plugin/feedback-config-for-jira/catalog-info.yaml
+
+    - type: url
+      target: https://github.com/yashoswalyo/backstage-templates/blob/master/feedback-plugin/feedback-config-for-mail/catalog-info.yaml
+
+    - type: file
+      target: ../../org.yaml
+      rules:
+        - allow: [User, Group]
 
     ## Uncomment these lines to add an example org
     # - type: url
@@ -135,3 +143,6 @@ dynamicPlugins:
         - bindTarget: 'remotePlugins.Scaffolder.scaffolderPlugin.externalRoutes'
           bindMap:
             registerComponent: 'catalogImportPlugin.routes.importPage'
+        - bindTarget: 'feedbackPlugin.externalRoutes'
+          bindMap:
+            viewDocs: 'techdocsPlugin.routes.root'

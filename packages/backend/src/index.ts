@@ -28,6 +28,7 @@ import Router from 'express-promise-router';
 import app from './plugins/app';
 import auth from './plugins/auth';
 import catalog from './plugins/catalog';
+import feedback from './plugins/feedback';
 import permission from './plugins/permissions';
 import proxy from './plugins/proxy';
 import scaffolder from './plugins/scaffolder';
@@ -89,6 +90,7 @@ async function main() {
   const searchEnv = useHotMemoize(module, () => createEnv('search'));
   const appEnv = useHotMemoize(module, () => createEnv('app'));
   const permissionEnv = useHotMemoize(module, () => createEnv('permission'));
+  const feedbackEnv = useHotMemoize(module, () => createEnv('feedback'));
 
   const apiRouter = Router();
   apiRouter.use('/catalog', await catalog(catalogEnv));
@@ -97,6 +99,7 @@ async function main() {
   apiRouter.use('/techdocs', await techdocs(techdocsEnv));
   apiRouter.use('/proxy', await proxy(proxyEnv));
   apiRouter.use('/search', await search(searchEnv));
+  apiRouter.use('/feedback', await feedback(feedbackEnv));
   apiRouter.use(
     '/permission',
     await permission(permissionEnv, {

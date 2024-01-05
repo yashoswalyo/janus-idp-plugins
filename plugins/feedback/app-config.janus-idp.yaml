@@ -1,0 +1,3 @@
+feedback:
+  summaryLimit: 40
+  baseEntityRef: component:default/feedback-on-jira

@@ -57,6 +57,8 @@ import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 
 import { Button, Grid } from '@material-ui/core';
 
+import { EntityFeedbackPage } from '@janus-idp/backstage-plugin-feedback';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -166,6 +168,9 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/feedback" title="Feedback">
+      <EntityFeedbackPage />
+    </EntityLayout.Route>
   </EntityLayout>
 );
 
@@ -192,6 +197,9 @@ const websiteEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/feedback" title="Feedback">
+      <EntityFeedbackPage />
     </EntityLayout.Route>
   </EntityLayout>
 );

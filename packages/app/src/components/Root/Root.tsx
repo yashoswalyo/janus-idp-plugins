@@ -22,6 +22,7 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import MenuIcon from '@material-ui/icons/Menu';
 import MapIcon from '@material-ui/icons/MyLocation';
 import SearchIcon from '@material-ui/icons/Search';
+import TextsmsOutlined from '@material-ui/icons/TextsmsOutlined';
 import { ScalprumComponent } from '@scalprum/react-core';
 
 import LogoFull from './LogoFull';
@@ -69,6 +70,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
+        <SidebarItem icon={TextsmsOutlined} to="feedback" text="Feedback" />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>

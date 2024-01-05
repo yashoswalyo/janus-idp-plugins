@@ -20,4 +20,14 @@ export interface Config {
       };
     };
   };
+  feedback?: {
+    /**
+     * @visibility frontend
+     */
+    summaryLimit?: number;
+    /**
+     * @visibility frontend
+     */
+    baseEntityRef: string;
+  };
 }

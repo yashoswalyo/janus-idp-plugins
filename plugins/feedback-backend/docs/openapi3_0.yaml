@@ -1,0 +1,258 @@
+openapi: 3.0.2
+info:
+  title: Feedback API
+  version: '1.0'
+servers:
+  - url: http://localhost:7007/api/feedback
+components:
+  schemas:
+    Feedback:
+      type: object
+      properties:
+        id:
+          type: string
+          default: 'V1StGXR8'
+          title: ID
+        summary:
+          type: string
+          title: Summary
+        projectId:
+          type: string
+          title: ProjectId
+        description:
+          type: string
+          title: Description
+        stackInfo:
+          title: StackInfo
+          type: object
+          properties:
+            path:
+              type: string
+              title: Location
+            userAgent:
+              type: string
+              title: User-Agent
+          required:
+            - path
+            - stack
+        tags:
+          default: null
+          type: string
+          title: Feedback Tag
+
+        ticketUrl:
+          type: string
+          title: Issue link
+        feedbackType:
+          enum:
+            - BUG
+            - FEEDBACK
+          title: feedbackCategory
+        createdAt:
+          type: string
+          title: createdAt
+        createdBy:
+          type: string
+          title: createdBy
+        updatedAt:
+          type: string
+          title: updatedAt
+        updatedBy:
+          type: string
+          title: updatedBy
+      required:
+        - summary
+        - projectId
+        - stackInfo
+        - experience
+        - error
+        - feedbackType
+        - createdBy
+paths:
+  /:
+    get:
+      summary: Get all the feedbacks from db
+      operationId: listFeedbacks
+      tags:
+        - All Feedbacks
+      parameters:
+        - name: projectId
+          schema:
+            type: string
+            default: null
+          in: query
+          description: Filter feedbacks based on Project Id
+        - name: page
+          schema:
+            type: number
+            default: 1
+          in: query
+          description: Current page that client is right now
+        - name: pageSize
+          schema:
+            type: number
+            default: 10
+          in: query
+          description: Number of feedbacks to fetch for single page
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    title: ListOfFeedback
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Feedback'
+                  totalFeedbacks:
+                    type: number
+                  currentPage:
+                    type: number
+                  pageSize:
+                    type: number
+    post:
+      summary: Create feedback and store it in database
+      operationId: createFeedback
+      tags:
+        - All Feedbacks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+      responses:
+        '201':
+          description: OK, Created!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    default: '0'
+                    title: ID
+                    format: uuid
+                  projectId:
+                    type: string
+                    title: ProjectId
+                  ticketUrl:
+                    type: string
+                    title: Issue link
+                required:
+                  - summary
+                  - projectId
+                  - stackInfo
+                  - experience
+                  - error
+                  - feedbackType
+  /{feedback_id}:
+    get:
+      summary: Get a feedback by a unique id
+      operationId: getFeedbackById
+      tags:
+        - All Feedbacks
+      parameters:
+        - name: feedback_id
+          in: path
+          description: Unique ID of a feedback
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+    patch:
+      summary: Update a feedback by an id
+      operationId: updateFeedback
+      tags:
+        - All Feedbacks
+      parameters:
+        - name: feedback_id
+          in: path
+          description: Unique ID of a feedback
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feedbackId:
+                  type: string
+                  title: Feedback ID
+                summary:
+                  type: string
+                  title: Summary
+                projectId:
+                  type: string
+                  title: ProjectId
+                stackInfo:
+                  title: StackInfo
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                      title: Location
+                    stack:
+                      type: string
+                      title: User-Agent
+                experience:
+                  default: null
+                  type: string
+                  title: Experience
+                error:
+                  default: null
+                  type: string
+                  title: Bug
+                ticketUrl:
+                  type: string
+                  title: Issue link
+                feedbackType:
+                  enum:
+                    - BUG
+                    - FEEDBACK
+                  title: feedbackCategory
+                createdBy:
+                  type: string
+                  title: createdBy
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+    delete:
+      summary: Delete a feedback by id
+      operationId: deleteFeedback
+      tags:
+        - All Feedbacks
+      parameters:
+        - name: feedback_id
+          in: path
+          description: Unique ID of a feedback
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Feedback deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: string

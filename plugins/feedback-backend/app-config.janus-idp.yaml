@@ -1,0 +1,14 @@
+feedback:
+  integrations:
+    jira:
+      - host: ${JIRA_HOST_URL}
+        token: ${JIRA_TOKEN}
+    email:
+      host: ${EMAIL_HOST}
+      port: ${EMAIL_PORT}
+      secure: false
+      from: ${EMAIL_FROM}
+      caCert: ${NODE_EXTRA_CA_CERTS}
+      auth:
+        user: ${EMAIL_USER}
+        pass: ${EMAIL_PASS}

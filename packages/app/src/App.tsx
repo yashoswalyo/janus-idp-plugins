@@ -19,6 +19,11 @@ import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 
 import { ScalprumProvider } from '@scalprum/react-core';
 
+import {
+  GlobalFeedbackPage,
+  OpcFeedbackComponent,
+} from '@janus-idp/backstage-plugin-feedback';
+
 import { apis } from './apis';
 import { entityPage } from './components/catalog/EntityPage';
 import { Root } from './components/Root';
@@ -34,6 +39,7 @@ export const AppBase = () => {
       <AlertDisplay />
       <OAuthRequestDialog />
       <AppRouter>
+        <OpcFeedbackComponent />
         <Root>
           <FlatRoutes>
             <Route path="/" element={<Navigate to="catalog" />} />
@@ -73,6 +79,7 @@ export const AppBase = () => {
                 element={<Component {...props} />}
               />
             ))}
+            <Route path="/feedback" element={<GlobalFeedbackPage />} />
           </FlatRoutes>
         </Root>
       </AppRouter>

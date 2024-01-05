@@ -13,6 +13,8 @@ import { processManifest } from '@scalprum/core';
 import { useScalprum } from '@scalprum/react-core';
 import get from 'lodash/get';
 
+import { feedbackPlugin } from '@janus-idp/backstage-plugin-feedback';
+
 import dynamicModuleRegistry from './dynamic-modules-registry.json';
 import DynamicRootContext, {
   DynamicModuleEntry,
@@ -139,6 +141,7 @@ const DynamicRoot = ({
             catalogPlugin,
             catalogImportPlugin,
             techdocsPlugin,
+            feedbackPlugin,
           };
           // binds from remote
           routeBindings.forEach(({ bindTarget, bindMap }) => {
