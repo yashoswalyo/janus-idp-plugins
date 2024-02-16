@@ -1,3 +1,4 @@
+import { LegacyPluginEnvironment } from '@backstage/backend-plugin-manager';
 import { CatalogClient } from '@backstage/catalog-client';
 
 import { fullFormats } from 'ajv-formats/dist/formats';
@@ -20,10 +21,9 @@ import {
   notificationsReadPermission,
   notificationsSetReadPermission,
 } from './permissions';
-import { RouterOptions } from './types';
 
 export async function createRouter(
-  options: RouterOptions,
+  options: LegacyPluginEnvironment,
 ): Promise<express.Router> {
   const { logger, database, discovery, config } = options;
 
